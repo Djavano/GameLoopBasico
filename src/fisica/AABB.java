@@ -12,7 +12,10 @@ package fisica;
 public class AABB {
     Vec2 min;
     Vec2 max;
-    
+  //uhduehuehe
+    //uhe
+    //bixo doido
+    int xis=0;
    public boolean AABBvsAABB( AABB a, AABB b ){
     // Exit with no intersection if found separated along an axis
     if(a.max.getX() < b.min.getX() || a.min.getX() > b.max.getX()) return false;
