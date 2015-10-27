@@ -17,10 +17,11 @@ public class Menu implements Screen {
 	
 	ButtonManager gerenteDeBotoes;
 	 BufferedImage menu;
+	 String last;
 	
 	
 	public Menu(){
-		
+		last="";
 		menu = AbreImagem("/imagens/menu.png");
 		
 		
@@ -71,6 +72,17 @@ public class Menu implements Screen {
 
 	@Override
 	public void update(long time) {
+		
+		//recebendo a tratando as mensagem do servidor
+		String teste = GamePanel.cliente.getMessage();
+		if(teste!=null){
+			last=teste;
+			System.out.println(teste);
+		}
+		
+		
+		
+		
 		// TODO Auto-generated method stub
 		//define as funções 
 		switch (gerenteDeBotoes.TASK) {
@@ -82,6 +94,7 @@ public class Menu implements Screen {
 			break;
 		case 2:
 			GamePanel.GameOver = true;
+			GamePanel.cliente.close();
 			
 		
 			gerenteDeBotoes.TASK=0;
@@ -123,6 +136,7 @@ public class Menu implements Screen {
 	public void onMousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
 		gerenteDeBotoes.pressed(e.getX(), e.getY());
+		GamePanel.cliente.sendMessage(e.getX()+";"+e.getY());
 		
 	}
 
@@ -140,7 +154,7 @@ public class Menu implements Screen {
 
 	@Override
 	public void draw(Graphics2D dbg) {
-		
+		dbg.drawString(last,350,20);
 		// TODO Auto-generated method stub
 		dbg.drawImage(menu, -1000, -750,null);
 	
